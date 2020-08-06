@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "cashRegisterUi": {
@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "cashRegisterUi"
+    }
+  },
+  "defaultProject": "cashRegisterUi",
+  "cli": {
+    "analytics": "034f07c4-ec25-4686-8c16-9c03a34f97cd"
+  }
 }

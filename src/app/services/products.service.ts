@@ -7,9 +7,19 @@ import {Product} from '../models/product';
 })
 export class ProductsService {
 
+  apiURL = 'http://localhost:10300/api/products';
+
   constructor(private http: HttpClient) { }
 
   findAll() {
-    return this.http.get<Product[]>('http://localhost:10300/api/products');
+    return this.http.get<Product[]>(this.apiURL);
+  }
+
+  delete(id) {
+    return this.http.delete(`${this.apiURL}/${id}`);
+  }
+
+  add(product) {
+    return this.http.post<Product>(this.apiURL, product);
   }
 }

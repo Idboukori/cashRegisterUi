@@ -1,0 +1,97 @@
+<div class="row my-4">
+
+  <div class="col-md-6">
+    <h3>Receipt creation</h3>
+  </div>
+  <div class="col-md-6 text-right">
+    <button (click)="createReceipt()" class="btn btn-dark btn-sm">
+      <i class="fa fa-plus"></i> Create receipt
+    </button>
+  </div>
+
+
+</div>
+
+<div class="row my-4">
+  <div class="col-md-6 ">
+    <div class="form-group">
+      <label for="barcode"> bar code</label>
+      <input [(ngModel)]="barcode" id="barcode"  type="text" class="form-control">
+    </div>
+    <button (click)="getProduct()"  class="btn btn-success btn-block">
+      <i class="fa fa-send"></i> Get product
+    </button>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-md-6 mx-auto">
+    <ul class="list-group">
+      <li *ngFor="let product of products" class="list-group-item justify-content-between align-items-center">
+        <button (click)="addProductToReceipt(product)" *ngIf="receiptCreation" class="btn btn-dark btn-sm">
+          <i class="fa fa-plus"></i> add to receipt
+        </button>
+        {{product.barcode}} - {{product.name}}
+      </li>
+    </ul>
+
+  </div>
+
+</div>
+<div class="row my-4">
+  <div class="col-md-6 mx-auto">
+    <div *ngIf="receiptCreation">
+      <h3>Receipt {{receipt.id}} </h3>
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">name</th>
+          <th scope="col">amount</th>
+          <th scope="col">cost</th>
+          <th scope="col">total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let product of receipt.products">
+          <th scope="row">#</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <td>   </td>
+          <td>   </td>
+          <td>   </td>
+          <td >
+            <p>
+              Subtotal: 
+            </p>
+            <p>
+              Tax: 
+            </p></td>
+          <td >
+            <p>
+              $6.94
+            </p>
+            <p>
+              $6.94
+            </p></td>
+        </tr>
+        <tr>
+          <td>   </td>
+          <td>   </td>
+          <td>   </td>
+          <td ><h4><strong>Total: </strong></h4></td>
+          <td class="text-danger"><h4><strong>$31.53</strong></h4></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+

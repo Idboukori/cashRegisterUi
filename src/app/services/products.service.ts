@@ -22,4 +22,8 @@ export class ProductsService {
   add(product) {
     return this.http.post<Product>(this.apiURL, product);
   }
+
+  getOne(barcode) {
+    return this.http.get<Product[]>(`${this.apiURL}?barcode=${barcode}`);
+  }
 }

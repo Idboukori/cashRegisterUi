@@ -11,9 +11,13 @@ import {Receipt} from '../../models/receipt';
 })
 export class ReceiptComponent implements OnInit {
 
-  products: Product[] = [];
+  product: Product[] = [];
 
   receipt: Receipt;
+
+  receiptProducts : object = {};
+
+  listBarcodes : string[] = []
 
   barcode: string;
 
@@ -26,7 +30,7 @@ export class ReceiptComponent implements OnInit {
 
   getProduct() {
     this.productService.getOne(this.barcode)
-      .subscribe(products => this.products = products['hydra:member']);
+      .subscribe(products => this.product = products['hydra:member']);
   }
 
 
@@ -39,11 +43,29 @@ export class ReceiptComponent implements OnInit {
   }
 
   addProductToReceipt(product){
-  console.log(product)
-    this.receiptService.addProduct(this.receipt.id,product)
-      .subscribe(() => {
-
-      });
+    this.receiptService.addProduct(this.receipt,product)
+      .subscribe(
+        res => {
+          console.log('received ok response from patch request');
+          if(product.barcode in this.receiptProducts){
+            this.receiptProducts[product.barcode]['amount']++;
+            this.receiptProducts[product.barcode]['total'] = product.cost*this.receiptProducts[product.barcode]['amount'];
+          }else {
+            this.listBarcodes.push(product.barcode);
+            this.receiptProducts[this.barcode] = {
+              name : product.name,
+              cost : product.cost,
+              amount : 1,
+              total : product.cost
+            }
+          }
+          console.log(this.receiptProducts)
+        },
+        error => {
+          console.error('There was an error during the request');
+          console.log(error);
+        }
+      );
   }
 
 }

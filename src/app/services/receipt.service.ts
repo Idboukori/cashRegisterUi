@@ -15,8 +15,12 @@ export class ReceiptService {
     return this.http.post<Receipt>(this.apiURL, {});
   }
 
-  addProduct(id , products) {
-    return this.http.patch(`${this.apiURL}/${id}`,{products: products});
+  addProduct(receipt , product) {
+    let list = receipt.products;
+    list.push(product['@id']);
+    return this.http.put(`${this.apiURL}/${receipt.id}`,{
+      "products": list
+    });
   }
 
 }

@@ -6,16 +6,19 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProductsComponent } from './components/products/products.component';
 
 
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { ReceiptComponent } from './components/receipt/receipt.component';
+import { AuthComponent } from './components/auth/auth.component';
+import {JwtInterceptor} from './provider/jwt.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     ProductsComponent,
-    ReceiptComponent
+    ReceiptComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { ReceiptComponent } from './components/receipt/receipt.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

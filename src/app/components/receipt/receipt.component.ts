@@ -30,7 +30,8 @@ export class ReceiptComponent implements OnInit {
 
   getProduct() {
     this.productService.getOne(this.barcode)
-      .subscribe(products => this.product = products['hydra:member']);
+      .subscribe(products => this.product = products['hydra:member'],
+        error => console.log(error));
   }
 
 

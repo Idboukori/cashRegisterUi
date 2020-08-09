@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductsService} from '../../services/products.service';
 import {Product} from '../../models/product';
+import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -17,9 +19,13 @@ export class ProductsComponent implements OnInit {
   };
   products: Product[] = [];
 
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService, private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit() {
+    if (localStorage.jwt === undefined) {
+      this.router.navigate(['login']);
+    }
     this.getProducts();
   }
 

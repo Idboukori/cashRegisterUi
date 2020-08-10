@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-auth',
@@ -11,7 +13,8 @@ export class AuthComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private authService: AuthService) { }
+
+  constructor(private authService: AuthService, private router: Router) { }
   ngOnInit(): void {
   }
 
@@ -21,10 +24,12 @@ export class AuthComponent implements OnInit {
         res => {
           console.log('received ok response from patch request');
           localStorage.setItem('jwt', JSON.stringify(res));
+          this.router.navigate(['']);
         },
         error => {
-          console.error('There was an error during the request');
-          console.log(error);
+          console.log('There was an error during the request');
+          alert(error.message);
+          console.log(error.message);
         }
       );
   }

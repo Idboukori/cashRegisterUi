@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import { ReceiptComponent } from './components/receipt/receipt.component';
 import { AuthComponent } from './components/auth/auth.component';
 import {JwtInterceptor} from './provider/jwt.interceptor';
+import {AuthGuard} from './guard/auth.guard';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import {JwtInterceptor} from './provider/jwt.interceptor';
     HttpClientModule,
     FormsModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

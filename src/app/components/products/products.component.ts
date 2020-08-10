@@ -3,6 +3,7 @@ import {ProductsService} from '../../services/products.service';
 import {Product} from '../../models/product';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-products',

@@ -21,6 +21,8 @@ export class ReceiptComponent implements OnInit {
 
   barcode: string;
 
+  total: number = 0;
+
   receiptCreation : boolean = false;
 
   constructor(private productService: ProductsService,private receiptService : ReceiptService) { }
@@ -48,6 +50,7 @@ export class ReceiptComponent implements OnInit {
       .subscribe(
         res => {
           console.log('received ok response from patch request');
+          console.log(this.receiptProducts)
           if(product.barcode in this.receiptProducts){
             this.receiptProducts[product.barcode]['amount']++;
             this.receiptProducts[product.barcode]['total'] = product.cost*this.receiptProducts[product.barcode]['amount'];
@@ -60,6 +63,7 @@ export class ReceiptComponent implements OnInit {
               total : product.cost
             }
           }
+          this.total = this.total + this.receiptProducts[product.barcode]['cost']
           console.log(this.receiptProducts)
         },
         error => {

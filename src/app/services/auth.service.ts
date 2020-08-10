@@ -15,8 +15,8 @@ export class AuthService {
   }
 
 
-  is_authenticated(): boolean {
-    return JSON.parse(localStorage.getItem('jwt')).token != null ;
+  loggedIn() {
+    return !!localStorage.getItem('jwt');
   }
 
 }

@@ -23,7 +23,7 @@ export class AuthComponent implements OnInit {
       .subscribe(
         res => {
           console.log('received ok response from patch request');
-          localStorage.setItem('jwt', JSON.stringify(res));
+          localStorage.setItem('jwt', JSON.stringify(res['token']));
           this.router.navigate(['']);
         },
         error => {
@@ -34,4 +34,7 @@ export class AuthComponent implements OnInit {
       );
   }
 
+
+
 }
+

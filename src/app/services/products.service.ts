@@ -24,6 +24,6 @@ export class ProductsService {
   }
 
   getOne(barcode) {
-    return this.http.get<Product[]>(`${this.apiURL}?barcode=${barcode}`);
+    return this.http.get<Product[]>(`http://localhost:10300/api/productbybarcode/?barcode=${barcode}`);
   }
 }

@@ -11,7 +11,7 @@ import {Receipt} from '../../models/receipt';
 })
 export class ReceiptComponent implements OnInit {
 
-  product: Product[] = [];
+  product: Product ;
 
   receipt: Receipt;
 
@@ -21,7 +21,9 @@ export class ReceiptComponent implements OnInit {
 
   barcode: string;
 
-  total: number = 0;
+  subtotal: number = 0;
+
+  tax: number = 0;
 
   receiptCreation : boolean = false;
 
@@ -32,7 +34,7 @@ export class ReceiptComponent implements OnInit {
 
   getProduct() {
     this.productService.getOne(this.barcode)
-      .subscribe(products => this.product = products['hydra:member'],
+      .subscribe(products => this.product = products['data'],
         error => console.log(error));
   }
 
@@ -60,10 +62,12 @@ export class ReceiptComponent implements OnInit {
               name : product.name,
               cost : product.cost,
               amount : 1,
+              vatclass : product.vatClass,
               total : product.cost
             }
           }
-          this.total = this.total + this.receiptProducts[product.barcode]['cost']
+          this.subtotal = this.subtotal + this.receiptProducts[product.barcode]['cost'];
+          this.tax = this.tax + this.receiptProducts[product.barcode]['cost']*this.receiptProducts[product.barcode]['vatclass']/100;
           console.log(this.receiptProducts)
         },
         error => {

@@ -17,7 +17,7 @@ export class ReceiptService {
 
   addProduct(receipt , product) {
     let list = receipt.products;
-    list.push(product['@id']);
+    list.push("/api/products/"+product.id);
     return this.http.put(`${this.apiURL}/${receipt.id}`,{
       "products": list
     });

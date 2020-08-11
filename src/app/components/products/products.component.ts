@@ -27,6 +27,13 @@ export class ProductsComponent implements OnInit {
     if (localStorage.jwt === undefined) {
       this.router.navigate(['login']);
     }
+    const helper = new JwtHelperService();
+
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    if (!decodedToken['roles'].includes("ROLE_ADMIN")) {
+      this.router.navigate(['login']);
+    }
+    console.log(decodedToken)
     this.getProducts();
   }
 

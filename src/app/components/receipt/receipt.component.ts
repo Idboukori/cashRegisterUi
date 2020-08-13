@@ -52,7 +52,7 @@ export class ReceiptComponent implements OnInit {
       .subscribe(
         res => {
           console.log('received ok response from patch request');
-          console.log(this.receiptProducts)
+          console.log(res)
           if(product.barcode in this.receiptProducts){
             this.receiptProducts[product.barcode]['amount']++;
             this.receiptProducts[product.barcode]['total'] = product.cost*this.receiptProducts[product.barcode]['amount'];
